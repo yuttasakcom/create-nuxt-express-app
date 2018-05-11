@@ -1,3 +1,4 @@
+const os = require("os");
 const _ = require("lodash");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -7,12 +8,43 @@ const validateCreateUser = require("../validations/users/create");
 const UserResponse = require("../responses/UserResponse");
 
 exports.get = async (req, res, next) => {
+  const pageNumber = parseInt(req.query.page) || 1;
+  const pageSize = 5;
+  const skip = (pageNumber - 1) * pageSize;
+  const timeQuery = req.query.time || Date.now();
+
   try {
-    const users = await User.find();
+    const result = User.find({ createdAt: { $lte: Number(timeQuery) } })
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createdAt: -1 });
+
+    const countAll = User.find().count();
+
+    const response = await Promise.all([result, countAll]);
+
+    const pageAll = Math.ceil(response[1] / pageSize);
+
+    let nextPage = "";
+    if (pageNumber < pageAll) {
+      nextPage = `${process.env.HOSTNAME}/api/users/?page=${pageNumber + 1}`;
+    }
+
+    let prevPage = "";
+    if (pageNumber > 1) {
+      prevPage = `${process.env.HOSTNAME}/api/users/?page=${pageNumber - 1}`;
+    }
 
     res.json({
       success: true,
-      data: UserResponse.all(users)
+      data: UserResponse.all(response[0]),
+      countData: response[0].length,
+      countAll: response[1],
+      currentPage: parseInt(pageNumber),
+      pageSize,
+      pageAll,
+      nextPage,
+      prevPage
     });
   } catch (err) {
     next(err);
