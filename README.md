@@ -1,6 +1,10 @@
 # create-nuxt-express-app
 
-> Full Stack JS
+## Before Setup
+
+```bash
+$ cp .env.example .env
+```
 
 ## Build Setup
 
@@ -19,4 +23,8 @@ $ yarn start
 $ yarn run generate
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+## Docker Compose Setup
+
+```bash
+$ docker-compose up -d --build
+```
