@@ -1,0 +1,5 @@
+{
+  "name": "server",
+  "script": "server/index.js",
+  "instances": "1"
+}
