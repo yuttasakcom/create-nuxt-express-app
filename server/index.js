@@ -1,4 +1,6 @@
 const http = require("http");
+const socketIO = require("socket.io");
+
 const { Nuxt, Builder } = require("nuxt");
 
 const app = require("./app");
@@ -22,6 +24,10 @@ async function start() {
 
   // Server
   const server = http.createServer(app);
+
+  // Socket
+  const io = socketIO(server);
+  require("./sockets")(io);
 
   // Listen the server
   server.listen(app.get("port"));
