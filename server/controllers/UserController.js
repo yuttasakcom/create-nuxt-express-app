@@ -9,7 +9,7 @@ const UserResponse = require("../responses/UserResponse");
 
 exports.get = async (req, res, next) => {
   const pageNumber = parseInt(req.query.page) || 1;
-  const pageSize = 5;
+  const pageSize = 10;
   const skip = (pageNumber - 1) * pageSize;
   const timeQuery = req.query.time || Date.now();
 
