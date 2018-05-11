@@ -1,10 +1,10 @@
 # create-nuxt-express-app
 
-> My rad Nuxt.js project
+> Full Stack JS
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ yarn install
 
