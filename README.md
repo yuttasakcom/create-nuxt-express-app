@@ -6,6 +6,12 @@
 $ cp .env.example .env
 ```
 
+## Start Mongo
+
+```bash
+$ docker-compose up -d mongo
+```
+
 ## Build Setup
 
 ```bash
@@ -14,13 +20,6 @@ $ yarn install
 
 # serve with hot reload at localhost:3000
 $ yarn run dev
-
-# build for production and launch server
-$ yarn run build
-$ yarn start
-
-# generate static project
-$ yarn run generate
 ```
 
 ## Docker Compose Setup
