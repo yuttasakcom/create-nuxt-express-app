@@ -1,5 +1,9 @@
 const http = require("http");
 const socketIO = require("socket.io");
+const redis = require("redis");
+const redisAdapter = require("socket.io-redis");
+const pub = redis.createClient("6379", "redis");
+const sub = redis.createClient("6379", "redis");
 
 const { Nuxt, Builder } = require("nuxt");
 
@@ -27,6 +31,7 @@ async function start() {
 
   // Socket
   const io = socketIO(server);
+  io.adapter(redisAdapter({ pubClient: pub, subClient: sub }));
   require("./sockets")(io);
 
   // Listen the server
