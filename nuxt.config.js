@@ -29,7 +29,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ["~plugins/vueSocket.js"],
+  plugins: ["~plugins/vueSocket.js", "~plugins/baseComponent.js"],
 
   /*
   ** Nuxt.js modules
