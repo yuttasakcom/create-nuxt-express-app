@@ -1,5 +1,5 @@
 {
   "name": "server",
   "script": "server/index.js",
-  "instances": "4"
+  "instances": "1"
 }
