@@ -66,4 +66,69 @@ $ docker-compose up -d --build
   * script: [
       { src: '' }
     ]
+
+* Handling Data
+  * asyncData(context, callback) { return {} } <-- property in export default {}
+  * asyncData(context) { return new Promise((resolve, reject)=> resolve({loadedSomethink: []}))
+      .then(data => data)
+      .catch(err => context.error(err))
+    } <-- property in export default {}
+  * fetch(context) { return {} } <-- property in export default {}
+    * context.store.commit('SET_SOMETHINK', data.loadedSomethink) <-- in then(data => {})
+
+* Store
+  * nuxtServerInit(vuexContext, context) {} <-- in actions
+    * vuexContext.commit('SET_SOMETHINK', [])
+
+* Client & Server Connecting
+  * !process.client can use context.req <-- in nuxtServerInit
+
+* Config
+  * nuxt.config.js -> https://nuxtjs.org/guide/configuration
+  * head: { title: 'title'} <-- property in export default {}
+  * loadingIndicator: { name: 'circle', color: 'hexcode'} <-- in nuxt.config.js
+    \_ mode: 'spa'
+  * env: {
+      baseUrl: process.env.BASE_URL || 'http://localhost:3000' <-- use process.env.baseUrl in client
+    }
+  * rootDir: '/my-app/'
+  * router: {
+      base: '/my-app/' or extendRoutes(routes, resolve) { path: '*', component: resolve(__dirname, 'pages/index.vue') }
+    }
+  * transition: { name: 'page' or 'fade', mode: 'out-in' }
+  * serverMiddleware: [ bodyParser.json(), '~/api ]
+  * generate: { routes: function() {
+      return axios.get('url').then(res => {
+        const routes = []
+        for (const key in res.data) {
+          routes.push(`/paths/${key}`)
+        }
+        return routes
+      })
+    }}
+
+* Pluins
+  |_ plugins
+     \_ coreComponent.js
+  * plugins: ["~plugins/coreComponent.js"] <-- in nuxt.config.js
+
+* Modules
+  * modules: [
+      '@nuxtjs/axios
+    ],
+    axios: {
+      baseURL: process.env.BASE_URL || 'http://localhost:3000'
+    } <-- use in nuxtServerInit := context.app.$axios.get('/path')
+      <-- use in asyncData(context) { return this.$axios.$get('/path')}
+
+* Middleware
+  |_ middleware
+     \_ auth.js
+  * middleware: ['auth'] <-- property in export default {}
 ```
+
+## Module should to learning more
+
+* @nuxtjs/axios
+* vue-socket.io
+* js-cookie
