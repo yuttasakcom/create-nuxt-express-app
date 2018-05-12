@@ -1,14 +1,22 @@
 const state = {
-  user: {
-    id: 1,
-    name: "YoYea"
+  user: null
+};
+
+const mutations = {
+  setUser(state, user) {
+    state.user = user;
   }
 };
 
-const mutations = {};
-
 const actions = {};
 
-const getters = {};
+const getters = {
+  user({ user }) {
+    return user;
+  },
+  isAuthenticated({ user }) {
+    return user !== null && user !== undefined;
+  }
+};
 
 export { state, mutations, actions, getters };
