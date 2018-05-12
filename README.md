@@ -64,6 +64,6 @@ $ docker-compose up -d --build
       { rel: 'stylesheet', href: ''}
     ]
   * script: [
-      { src: 'https://code.jquery.com/jquery-3.2.1.min.js' }
+      { src: '' }
     ]
 ```
