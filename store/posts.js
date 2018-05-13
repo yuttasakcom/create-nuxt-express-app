@@ -6,6 +6,15 @@ const mutations = {};
 
 const actions = {};
 
-const getters = {};
+const getters = {
+  loadedPosts({ loadedPosts }) {
+    return loadedPosts;
+  }
+};
 
-export { state, mutations, actions, getters };
+export default {
+  state,
+  mutations,
+  actions,
+  getters
+};

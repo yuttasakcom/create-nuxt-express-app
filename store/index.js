@@ -11,9 +11,10 @@ requireModule.keys().forEach(filename => {
   if (filename === "./index.js") return;
 
   const moduleName = cameCase(filename.replace(/(\.\/|\.js)/g, ""));
+  const storeConfig = requireModule(filename);
   modules[moduleName] = {
     namespaced: true,
-    ...requireModule(filename)
+    ...(storeConfig.default || storeConfig)
   };
 });
 
