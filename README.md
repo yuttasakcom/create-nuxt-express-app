@@ -132,3 +132,15 @@ $ docker-compose up -d --build
 * @nuxtjs/axios
 * vue-socket.io
 * js-cookie
+
+## Testing
+
+> https://vue-test-utils.vuejs.org/en/
+
+```
+Why test?
+- Check application works correctly
+- Provide documentation
+- Easier debugging
+- Less bugs
+```
